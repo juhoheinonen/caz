@@ -1,10 +1,18 @@
-function updateContent() {
-    const contentDiv = document.getElementById('content');
-    if (contentDiv) {
-        contentDiv.innerHTML = `Current time: ${new Date().toLocaleTimeString()}`;
-    }
-}
+import { Peliruutu, Ruututyyppi } from "./tyypit";
+const ruudukkoLeveys: number = 60;
+const ruudukkoKorkeus: number = 60;
+const button = document.querySelector("#painikeAloitaPeli");
 
-// Update content every second
-updateContent();
-setInterval(updateContent, 1000);
+if (!button) {
+  throw new Error("Button not found");
+}
+button.addEventListener("click", (event) => {
+  console.log("Painiketta painettu");
+});
+
+function aloitaPeli() {
+  const taulukko = document.getElementById("taulukkoRuudukko");
+  for (let x = 0; x < ruudukkoLeveys; x++) {
+
+  }
+}
