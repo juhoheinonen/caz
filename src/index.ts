@@ -3,6 +3,7 @@ const ruudukkoLeveys: number = 60;
 const ruudukkoKorkeus: number = 60;
 const button = document.querySelector("#painikeAloitaPeli");
 const peliruudukko: Peliruutu[][] = [];
+let ristinVuoro = true;
 
 
 if (!button) {
@@ -25,8 +26,7 @@ function alustaPeliruudukko() {
     for (let y = 0; y < ruudukkoKorkeus; y++) {
       peliruudukko[x][y] = {
         tyyppi: Ruututyyppi.Tyhja,
-      };
-      // peliruudukko.push(Array(30).fill(x));
+      };    
     }
   }
 }
@@ -36,14 +36,39 @@ function piirraRuudukko() {
   if (!taulukko) {
     throw new Error("Taulukkoa ei löytynyt");
   }
+  taulukko.innerHTML = '';
   for (let y = 0; y < ruudukkoKorkeus; y++) {
     const rivi = document.createElement("tr");
     taulukko.append(rivi);
     for (let x = 0; x < ruudukkoLeveys; x++) {
+      const peliruutu = peliruudukko[x][y];
       const solu = document.createElement("td");
+      if (!peliruutu) {
+        throw new Error("Peliruutu on hukassa");
+      }
+      if (peliruutu.tyyppi == Ruututyyppi.Risti) {
+        solu.innerHTML="X";
+      } else if (peliruutu.tyyppi) {
+        solu.innerHTML="O";
+      } else {
+        solu.addEventListener("click", (event) => {
+          console.log("Solua klikattu");
+          ruutuaKlikattu(peliruutu);
+          piirraRuudukko();
+        });
+      }
       rivi.append(solu);
     }
   }
+}
+
+function ruutuaKlikattu(peliruutu:Peliruutu) {
+  if (ristinVuoro) {
+    peliruutu.tyyppi=Ruututyyppi.Risti;
+  } else {
+    peliruutu.tyyppi=Ruututyyppi.Nolla;
+  }
+  ristinVuoro=!ristinVuoro;
 }
 
 
