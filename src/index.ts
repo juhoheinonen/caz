@@ -21,6 +21,7 @@ function aloitaPeli() {
 
 function alustaPeliruudukko() {
   for (let x = 0; x < ruudukkoLeveys; x++) {
+    peliruudukko[x]=[];
     for (let y = 0; y < ruudukkoKorkeus; y++) {
       peliruudukko[x][y] = {
         tyyppi: Ruututyyppi.Tyhja,
@@ -39,7 +40,8 @@ function piirraRuudukko() {
     const rivi = document.createElement("tr");
     taulukko.append(rivi);
     for (let x = 0; x < ruudukkoLeveys; x++) {
-      
+      const solu = document.createElement("td");
+      rivi.append(solu);
     }
   }
 }
